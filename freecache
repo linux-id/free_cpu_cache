@@ -1,0 +1,26 @@
+#!/bin/bash
+
+echo ""
+echo "----- Free CPU Cache -----"
+echo "        ~ developed by linux-id"
+echo ""
+free -h                 # display memory usage
+echo ""
+echo "Choose option:"
+echo "    1. Clear PageCache only"
+echo "    2. Clear dentries and inodes only"
+echo "    3. Clear PageCache, dentries, and inodes"
+echo ""
+echo "note: all the above options clear caches without interrupting any services or processes"
+echo ""
+
+read -p "Enter option:" user_choice
+
+if [ "$user_choice" = "1" ] || [ "$user_choice" = "2" ] || [ "$user_choice" = "3" ]; then
+    sudo sh -c "echo $user_choice > /proc/sys/vm/drop_caches"
+    echo ""
+    free -h             # display memory usage
+else
+    echo ""
+    echo "Incorrect option entered, please retry!"
+fi
